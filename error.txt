@@ -1,0 +1,9 @@
+python通过SMTP协议发送邮件失败,报错505或535
+
+发送失败错误1：smtplib.SMTPAuthenticationError: (550, b'User has no permission')
+   我们使用python发送邮件时相当于自定义客户端根据用户名和密码登录，然后使用SMTP服务发送邮件，新注册的163邮箱是默认不开启客户端授权的，因此登录总是被拒绝，解决办法（以163邮箱为例）：进入163邮箱-设置-客户端授权密码-开启（授权码是用于登录第三方邮件客户端的专用密码），非第三方登录密码不变。
+
+
+错误2：smtplib.SMTPAuthenticationError: (535, b'Error: authentication failed')
+
+　　以163邮箱为例，在开启POP3/SMTP服务，并开启客户端授权密码时会设置授权码，将这个授权码代替smtplib.SMTP().login(user,password)方法中的password即可
